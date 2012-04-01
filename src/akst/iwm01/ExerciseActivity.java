@@ -7,61 +7,52 @@ import android.widget.TextView;
 
 public class ExerciseActivity extends Activity {
 
-	private String typeStr;
 	private int type;
-	private String levelStr;
 	private boolean level;
 	private int amount;
 
-	private TextView exerciseName;
+	private TextView exerciseNameLabel;
 	private TextView amountLabel;
 	private TextView timeLabel;
+	
+	private SpinnerState excerciseSpinnerState;
+	private SpinnerState levelSpinnerState;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
-		// TODO Auto-generated method stub
+
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.exercise_layout);
-
-		exerciseName = (TextView) findViewById(R.id.exerciseName);
+		
+		exerciseNameLabel = (TextView) findViewById(R.id.exerciseName);
 		amountLabel = (TextView) findViewById(R.id.amountLabel);
 		timeLabel = (TextView) findViewById(R.id.timeLabel);
-
-		
-		
-
 	}
 	
 	@Override
 	protected void onResume() {
 		super.onResume();
 		
-		typeStr = getIntent().getStringExtra("typ");
-		levelStr = getIntent().getStringExtra("poziom");
+		excerciseSpinnerState = (SpinnerState) getIntent().getSerializableExtra("typ");
+		levelSpinnerState = (SpinnerState) getIntent().getSerializableExtra("poziom");
 		amount = Integer.parseInt(getIntent().getStringExtra("ilosc"));
-
-		exerciseName.setText(typeStr);
+		
+		type = excerciseSpinnerState.getExerciseId();
+		level = levelSpinnerState.getLevelId();
+		exerciseNameLabel.setText(excerciseSpinnerState.getName());
 		amountLabel.setText(Integer.toString(amount));
 		
-		
-		if(levelStr.equals("Latwy")) {
-			level = Settings.POZIOM_LATWY;
-		} else {
-			level = Settings.POZIOM_TRUDNY;
-		}
-
-		if (typeStr.equals("Pompki")) {
-			//Log.d("typ", "pompki");
-			type = Settings.POMPKI;
-		}
-
 		Exercise exercise = null;
 
 		switch (type) {
 		case Settings.POMPKI:
 			exercise = new Pompka();
+		case Settings.BRZUSZKI:
+			exercise = new Pompka();
+		case Settings.PRZYSIADY:
+			exercise = new Pompka();
 		}
 		
-		timeLabel.setText(exercise.calculateTime(amount, level));
+		timeLabel.setText(exercise.getTime(amount, level));
 	}
 }

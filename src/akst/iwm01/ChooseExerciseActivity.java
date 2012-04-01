@@ -1,5 +1,6 @@
 package akst.iwm01;
 
+
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -14,9 +15,10 @@ import android.widget.Spinner;
 public class ChooseExerciseActivity extends Activity {
 
 	Context ctx;
-	Spinner spinner;
+	Spinner exerciseSpinner;
 	Spinner levelSpinner;
 	EditText amount;
+	Button startBtn;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -25,25 +27,27 @@ public class ChooseExerciseActivity extends Activity {
 
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.choose_exercise_layout);
-		spinner = (Spinner) findViewById(R.id.spinner1);
-		ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(
-				this, R.array.exercisesLabels,
-				android.R.layout.simple_spinner_item);
-		adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-		spinner.setAdapter(adapter);
-
+		startBtn = (Button) findViewById(R.id.startExerciseBtn);
+		exerciseSpinner = (Spinner) findViewById(R.id.spinner1);
+		levelSpinner = (Spinner) findViewById(R.id.level);
 		amount = (EditText) findViewById(R.id.amount);
 		
-		levelSpinner = (Spinner) findViewById(R.id.level);
+		ArrayAdapter<SpinnerState> excerciseSpinnerArrayAdapter = new ArrayAdapter<SpinnerState>(this,
+				android.R.layout.simple_spinner_item, Settings.EXCERCISE_ITEMS);
+		exerciseSpinner.setAdapter(excerciseSpinnerArrayAdapter);
 
-		Button startBtn = (Button) findViewById(R.id.startExerciseBtn);
+		ArrayAdapter<SpinnerState> levelSpinnerArrayAdapter = new ArrayAdapter<SpinnerState>(this,
+				android.R.layout.simple_spinner_item, Settings.LEVEL_ITEMS);
+		levelSpinner.setAdapter(levelSpinnerArrayAdapter);
+		
+
 		startBtn.setOnClickListener(new OnClickListener() {
 
 			public void onClick(View v) {
 				Intent intent = new Intent(ctx, ExerciseActivity.class);
-				intent.putExtra("typ", spinner.getSelectedItem().toString());
+				intent.putExtra("typ", (SpinnerState)exerciseSpinner.getSelectedItem());
+				intent.putExtra("poziom", (SpinnerState)levelSpinner.getSelectedItem());
 				intent.putExtra("ilosc", amount.getText().toString());
-				intent.putExtra("poziom", levelSpinner.getSelectedItem().toString());
 				startActivity(intent);
 			}
 		});

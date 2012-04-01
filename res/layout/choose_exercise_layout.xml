@@ -16,7 +16,8 @@
     <Spinner
         android:id="@+id/spinner1"
         android:layout_width="fill_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content" 
+        />
 
     <LinearLayout
         android:id="@+id/linearLayout1"
@@ -62,7 +63,6 @@
             android:id="@+id/level"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:entries="@array/levelLabels"
              />
     </LinearLayout>
 

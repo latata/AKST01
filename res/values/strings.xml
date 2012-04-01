@@ -2,15 +2,6 @@
 <resources>
 
     <string name="hello">Hello World, AKST01Activity!</string>
-    <string name="app_name">AKST01</string>
-    <string-array name="exercisesLabels">
-        <item>Pompki</item>
-        <item>Brzuszki</item>
-        <item>Przysiady</item>
-    </string-array>
-    <string-array name="levelLabels">
-        <item>Latwy</item>
-        <item>Trudny</item>
-    </string-array>
+    <string name="app_name">Keep calm</string>
 
 </resources>
