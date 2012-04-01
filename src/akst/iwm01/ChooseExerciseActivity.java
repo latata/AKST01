@@ -33,11 +33,13 @@ public class ChooseExerciseActivity extends Activity {
 		amount = (EditText) findViewById(R.id.amount);
 		
 		ArrayAdapter<SpinnerState> excerciseSpinnerArrayAdapter = new ArrayAdapter<SpinnerState>(this,
-				android.R.layout.simple_spinner_dropdown_item, Settings.EXCERCISE_ITEMS);
+				android.R.layout.simple_spinner_item, Settings.EXCERCISE_ITEMS);
+		excerciseSpinnerArrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 		exerciseSpinner.setAdapter(excerciseSpinnerArrayAdapter);
 
 		ArrayAdapter<SpinnerState> levelSpinnerArrayAdapter = new ArrayAdapter<SpinnerState>(this,
-				android.R.layout.simple_spinner_dropdown_item, Settings.LEVEL_ITEMS);
+				android.R.layout.simple_spinner_item, Settings.LEVEL_ITEMS);
+		levelSpinnerArrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 		levelSpinner.setAdapter(levelSpinnerArrayAdapter);
 		
 
