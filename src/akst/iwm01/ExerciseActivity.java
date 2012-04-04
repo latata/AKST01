@@ -2,6 +2,7 @@ package akst.iwm01;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
@@ -35,6 +36,8 @@ public class ExerciseActivity extends Activity {
 	private Exercise exercise;
 	
 	private float x, y, z;
+	
+	private Stopwatch stopwatch;
 	
 	private SensorManager sensorManager;
 	private SensorEventListener accelerationListener = new SensorEventListener() {
@@ -93,15 +96,26 @@ public class ExerciseActivity extends Activity {
 		counterLabel = (TextView) findViewById(R.id.counterLabel);
 		startBtn = (Button) findViewById(R.id.button1);
 		
+		stopwatch = new Stopwatch(currentTime);
+		
 		startBtn.setOnClickListener(new OnClickListener() {
 			
 			public void onClick(View v) {
-				startBtn.setText("Stop");
-				sensorManager.registerListener(accelerationListener,
-						sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER),
-						SensorManager.SENSOR_DELAY_GAME);
-				thread.start();
-				
+				if(startBtn.getText().equals("Rozpocznij"))
+				{
+					startBtn.setText("Stop");
+					sensorManager.registerListener(accelerationListener,
+							sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER),
+							SensorManager.SENSOR_DELAY_GAME);
+					thread.start();
+					stopwatch.startThread();
+				}
+				else
+				{
+					startBtn.setText("Rozpocznij");
+					stopwatch.stopThread();
+					thread.stop();
+				}
 			}
 		});
 		
@@ -122,6 +136,7 @@ public class ExerciseActivity extends Activity {
 		exerciseNameLabel.setText(excerciseSpinnerState.getName());
 		amountLabel.setText(Integer.toString(amount));
 
+		
 		switch (type) {
 		case Settings.POMPKI:
 			exercise = new Pompka(amount, level);
