@@ -20,20 +20,7 @@ public abstract class Exercise {
 	abstract public void exerciseCounter(float x, float y, float z);
 	
 	public String getTime() {
-		
-		String secondsString;
-		String minutesString;
-		int timeInSeconds = calculateTime();
-		int minutes = timeInSeconds / 60;
-		int seconds = timeInSeconds % 60;
-		
-		secondsString = ( seconds < 10 ) ? ":0" + seconds 
-										 : ":" + seconds;
-		
-		minutesString = ( minutes < 10 ) ? "0" + minutes 
-				 						 : Integer.toString(minutes);
-		
-		return (minutesString + secondsString);
+		return TimeFormatting.getInstance().formatTimeInMilis(calculateTime());
 	};
 	
 	public int getAmount() {
