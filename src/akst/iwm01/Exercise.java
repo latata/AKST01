@@ -51,8 +51,8 @@ public abstract class Exercise {
 		return counter;
 	}
 	
-	public void toggleDownFlag() {
-		this.downFlag = !this.downFlag;
+	public void setDownFlag(boolean flag) {
+		this.downFlag = flag;
 	}
 	
 	public boolean getDownFlag() {

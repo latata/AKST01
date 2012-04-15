@@ -6,15 +6,17 @@ public class Pompka extends Exercise {
 	private static final float START_X_MAX = (float) 2.5;
 	private static final float START_Y_MIN = (float) 7;
 	private static final float START_Y_MAX = (float) 12;
-	private static final float START_Z_MIN = (float) -2.5;
-	private static final float START_Z_MAX = (float) 2.5;
+	private static final float START_Z_MIN = (float) -4.0;
+	private static final float START_Z_MAX = (float) 4.0;
 	
 	private static final float STOP_X_MIN = (float) -2.5;
 	private static final float STOP_X_MAX = (float) 2.5;
-	private static final float STOP_Y_MIN = (float) -2.5;
-	private static final float STOP_Y_MAX = (float) 2.5;
-	private static final float STOP_Z_MIN = (float) 7;
-	private static final float STOP_Z_MAX = (float) 12;
+	private static final float STOP_Y_MIN = (float) -2.0;
+	private static final float STOP_Y_MAX = (float) 2.0;
+	private static final float STOP_Z_MIN = (float) -12;
+	private static final float STOP_Z_MAX = (float) -7;
+	
+	private String accValues = "init";
 	
 	public Pompka(int amount, boolean level) {
 		super(amount, level);
@@ -36,6 +38,7 @@ public class Pompka extends Exercise {
 
 	@Override
 	public void exerciseCounter(float x, float y, float z) {
+		//this.accValues = Float.toString(x) + ", "+ Float.toString(y) + ", "+ Float.toString(z);
 		if(!isExerciseStarted()) {
 			if(inStartRangeX(x) && inStartRangeY(y) && inStartRangeZ(z)) {
 				startExercise();
@@ -44,9 +47,11 @@ public class Pompka extends Exercise {
 		else {
 			if(getDownFlag() && inStartRangeX(x) && inStartRangeY(y) && inStartRangeZ(z)) {
 				increaseCounter();
-				toggleDownFlag();
+				setDownFlag(false);
+				this.accValues="flag false";
 			} else if(inStopRangeX(x) && inStopRangeY(y) && inStopRangeZ(z)) {
-				toggleDownFlag();
+				setDownFlag(true);
+				this.accValues="flag true";
 			}
 		}
 		
@@ -80,5 +85,9 @@ public class Pompka extends Exercise {
 	private boolean inStopRangeX(float x) {
 		if(x > STOP_X_MIN && x < STOP_X_MAX) return true;
 		return false;
+	}
+	
+	public String getAccValues() {
+		return accValues;
 	}
 }

@@ -26,6 +26,10 @@ public class Stopwatch extends Thread {
 		currentTimeTextView.setText(TimeFormatting.getInstance().formatTimeInMilis(currentTime));
 	}
 	
+	public boolean getThreadAliveFlag() {
+		return threadAliveFlag;
+	}
+	
 	public void stopThread() {
 		threadAliveFlag = false;
 	}
@@ -47,7 +51,7 @@ public class Stopwatch extends Thread {
 			}
 		}
 		
-		return;
+		//return;
 	};
 
 }

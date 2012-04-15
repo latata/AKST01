@@ -22,7 +22,7 @@ public class Settings {
 		new SpinnerState("Przysiady", PRZYSIADY) }; 
 
 	public static final SpinnerState[] LEVEL_ITEMS = new SpinnerState[] {
-		new SpinnerState("≈Åatwy", POZIOM_LATWY),
+		new SpinnerState("£atwy", POZIOM_LATWY),
 		new SpinnerState("Trudny", POZIOM_TRUDNY) };
 	
 
